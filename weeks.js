@@ -1,17 +1,34 @@
 
-function weekcount(date){
+ let array=[
+   {id:1,name:"prem"},
+   {id:2,name:"ram"},
+   {id:3,name:"mohan"},
+   {id:4,name:"aman"},
+   {id:5,name:"prem"},
 
-    if (date/7<=1) {
-        console.log("1st week")
-      } else if ((date/7>1)&&(date/7<=2)) {
-        console.log("2nd week")
-      } else if((date/7>2)&&(date/7<=3)) {
-        console.log("3rd week")
-      }else if((date/7>3)&&(date/7<=4)){
-        console.log("4th  week")
-      }else if((date/7>4)&&(date/7<=5)){
-        console.log("5th week")
-      }
+ ]
+ 
+//duplicate ka sum bas 
+
+let output=array.map(data=>data.name);
+
+
+let sum=0;
+let ele=array.map(data=>data.id);
+console.log(ele);
+let ygj=[1,2,3,4]
+for(i=0;i<array.length;i++){
+sum=sum + ele[i];
+
 }
+console.log(sum)
+let add=0;
+array.forEach(data=>{
+add=add+data.id
+})
+console.log("hi add=",add)
 
-weekcount(30);
+
+//
+
+

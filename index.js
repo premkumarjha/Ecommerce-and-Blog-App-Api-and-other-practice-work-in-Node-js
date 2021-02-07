@@ -98,6 +98,8 @@ var PAYPAL_API = 'https://api.sandbox.paypal.com';
 
   var path = require('path');
 
+  var passport = require('passport');
+
   // app.get('/', function (req, res) {
   //   res.send('Hello World!');
   // });
@@ -107,11 +109,14 @@ var PAYPAL_API = 'https://api.sandbox.paypal.com';
 
 
   app.use(express.urlencoded({ extended: true }));
-  var router = require('./route');
+
+  var router= require('./route');
 
  
 
-  var forgotpasswordRouter = require('./forgotpasswordRoute')
+  var forgotpasswordRouter = require('./forgotpasswordRoute');
+
+  var passportloginRouter=require('./passportRoute')
   //login route
 
   var publicDir = require('path').join(__dirname, './uploads');
@@ -122,9 +127,27 @@ var PAYPAL_API = 'https://api.sandbox.paypal.com';
   var bodyParser = require('body-parser');
   app.use(bodyParser.json());
   app.use(cors());
+  
+//passport js , if umcomment below line it will through error
+require('./passport-config');
+
+//var session = require("express-session");
+// app.use(session({
+//   secret: 'secret',
+//   resave: true,
+//   saveUninitialized: true,
+// }));
+
+//app.use(session({ secret: "cats" }));
+app.use(passport.initialize());
+app.use(passport.session());  
+
+
   app.use('/', router);
 
   app.use('/forgotpassword', forgotpasswordRouter);
+
+  app.use('/passportlogin', passportloginRouter);
 
   app.use('/course', addCourseRouter);
   //ejs

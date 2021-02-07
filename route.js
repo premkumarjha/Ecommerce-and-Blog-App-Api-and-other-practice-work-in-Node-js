@@ -46,11 +46,14 @@ console.log(process.env.SECRET_KEY)  //to access env variable
 
 /* GET ALL Student */
 router.get('/', function (req, res,) {
+ let abc=4;
   Student.find(function (err, post) {
     if (err) {
       console.log(err);
     }
     else {
+
+      let ram=post;
       res.json(post);
     }
   });
@@ -323,20 +326,23 @@ User.findOne({email}).exec((err,user)=>{
 
 //signup
 router.post('/login',async function (req, res) {
+  // if( req.body.email==""){
+  //   return res.send({error:"please fill email id"});
+  // }
 
-  User.find({ email: req.body.email })
-    .exec()
-    .then(user => {
+  let user=await User.find({ email: req.body.email })
+    // .exec()
+    ////.then(user => {
       if (user.length < 1) {
        return res.send({
-          message: "Auth failed1"
+        message: "user not found"
         });
       }
       bcrypt.compare(req.body.password, user[0].password, (err, result) => {
         console.log(result)
         if (err) {
           return  res.send({
-            message: "Auth failed2"
+            error: err
           });
         }
         if (result) {
@@ -358,17 +364,17 @@ router.post('/login',async function (req, res) {
           
         }
         res.status(401).json({
-          message: "Auth failed3"
+          error:err
         });
       });
     })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: "error occured"
-      });
-    });
-})
+    // .catch(err => {
+    //   console.log(err);
+    //   res.status(500).json({
+    //     error: "error occured"
+    //   });
+    // });
+//})
 
 //sending email using nodemailer
 
@@ -449,17 +455,15 @@ router.post('/adminlogin', async function (req, res) {
     // });
 })
 
-var options = { method: 'POST',
-  url: 'https://dev-zh9gbzcl.us.auth0.com/oauth/token',
-  headers: { 'content-type': 'application/json' },
-  body: '{"client_id":"ithPwaU9sxlZeBJ14jOud4ot34OjMoxZ","client_secret":"DMXb6HfFNMgDmzm5ZjxhEAZs5EZ2Gtdqu3vBp9wiVbA_BlY2x1fT1V3do37wA1yT","audience":"http://localhost:3000/","grant_type":"client_credentials"}' };
+// var options = { method: 'POST',
+//   url: 'https://dev-zh9gbzcl.us.auth0.com/oauth/token',
+//   headers: { 'content-type': 'application/json' },
+//   body: '{"client_id":"ithPwaU9sxlZeBJ14jOud4ot34OjMoxZ","client_secret":"DMXb6HfFNMgDmzm5ZjxhEAZs5EZ2Gtdqu3vBp9wiVbA_BlY2x1fT1V3do37wA1yT","audience":"http://localhost:3000/","grant_type":"client_credentials"}' };
 
-request(options, function (error, response, body) {
-  if (error) throw new Error(error);
+// request(options, function (error, response, body) {
+//   if (error) throw new Error(error);
 
-  console.log(body);
-});
+//   console.log(body);
+// });
 
-var content= fs.readFileSync(path.join(__dirname, 'abc.html'),'utf8')
-console.log(content.body)
 module.exports = router;
