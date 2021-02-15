@@ -191,10 +191,13 @@ if(err){
 
 forgotpasswordRouter.post('/filldata', upload.single('images'), function(req,res){
 
-//const data: fs.readFileSync(req.file.path),
+
 // read binary data
+
+ // read the img file from tmp in-memory location
 var imagedata= fs.readFileSync(req.file.path);
 //// convert binary data to base64 encoded string
+// encode the file as a base64 string.
 var base64data=imagedata.toString('base64');
 var data=new imageModel({
   img: 

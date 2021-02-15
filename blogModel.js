@@ -5,7 +5,7 @@ var blogSchema = new mongoose.Schema({
   
   //to avoid duplicate, still agar duplicate dega to error status 500 aayega, so we have to handle this eroror in UI;
     //authorid:{unique:true,type:String},
-    author:{type:String,unique:true,required : true},
+    author:{type:String,unique:true},
     password:String,
     content:[
       {
@@ -17,7 +17,10 @@ var blogSchema = new mongoose.Schema({
     // image:String,
     // published:String,
     // title:String,
-    
+  //   Comment:[{
+  //     type:schema.Types.ObjectId,
+  //     ref:"commentsdata"
+  // }],
     
     });
   module.exports = mongoose.model('blog', blogSchema);
