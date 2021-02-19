@@ -176,34 +176,7 @@ addCourseRouter.post('/postcontent/:id', upload.single('images'), async function
 
 });
 
-// addCourseRouter.post('/postcontent/:id',  async function (req, res) {
-//   //upload.single('images'),
-//    try {
-  
-//  var content=new Contents(req.body);
 
-//   //   //getting author to whom content belongs to
-//     let user = await Blog.findById({ _id: new mongoose.Types.ObjectId(req.params.id)});
-    
-//     //assign author to content
-//     const bloged = new Blog();
-//     content.Author = user;
-//     //content.comments=cmt;
-//     //add contents to author content field
-//     bloged.content.push(content);
-
-//     await content.save();
-//     await bloged.save();
-//     //await cmnt.save();
-
-//     //console.log(bloged)
-//     return res.send(bloged);
-//   }
-//   catch (err) {
-//     return res.send(err);
-//   }
-
-// });
 
 addCourseRouter.get('/getauthor', async function (req, res,) {
 
