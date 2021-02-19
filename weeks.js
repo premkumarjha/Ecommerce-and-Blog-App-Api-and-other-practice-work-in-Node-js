@@ -208,7 +208,7 @@ let ab=9;
 let ob={};
 ob[ab]=3;
 ob["ab"]=90;
-console.log(ob)
+//console.log(ob)
 
 // to remove duplicate***********************************************************
 const arr = [
@@ -230,8 +230,8 @@ arr.filter(data=>{
     unqarr.push(data);
   }
 })
-//a={b:"rma"}, c={b:"ram"},a not c
-console.log(unqarr);
+//a={b:"rma"}, c={b:"ram"},a,c is reference of object not the actual object so a and c are not same;
+//console.log(unqarr);
 
 // to remove duplicate************************************************************
 
@@ -241,10 +241,9 @@ arr.forEach(data=>{
     unqarr.push(data);
   }
 })
-//a={b:"rma"}, c={b:"ram"},a not c
-console.log(unqarr)
+//a={b:"rma"}, c={b:"ram"},a,c is reference of object not the actual object so a and c are not same;
 
-//to remove duplicate***********************************
+//to remove duplicate****************************************************************
 
 arr.forEach(data=>{
   
@@ -254,5 +253,19 @@ arr.forEach(data=>{
     return unqarr
   }
 })
-//a={b:"rma"}, c={b:"ram"},a not c
-console.log(unqarr)
+//a={b:"rma"}, c={b:"ram"},a,c is reference of object not the actual object so a and c are not same;
+//console.log(unqarr)
+
+
+//to remove duplicate*******************************************************
+
+let distinctArrayObject = arr.reduce( (accumulator, currentValue)=> {   //here accumulato ka initial value=>[]
+  if (accumulator.filter(data=>data.id==currentValue.id).length==0) {       
+    accumulator.push(currentValue);         
+  }
+  return accumulator;
+}, []);
+
+//console.log(distinctArrayObject)
+//*************************************************************************************************************************** *//
+
