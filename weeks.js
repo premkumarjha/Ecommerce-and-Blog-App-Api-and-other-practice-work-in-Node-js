@@ -267,5 +267,49 @@ let distinctArrayObject = arr.reduce( (accumulator, currentValue)=> {   //here a
 }, []);
 
 //console.log(distinctArrayObject)
-//*************************************************************************************************************************** *//
+//********************************************************SPREAD OPERATOR ->updating object using spread operator******************************************************************* *//
 
+//spread operator and object.assign ye sab just object copy ke liye use hota..
+
+let object={a:"b",
+
+          address:{
+          country:"india",
+          city:"fghj"
+          }
+
+};
+const updatedobject={...object,a:"v",address:{...object.address},city:"abc"};
+
+console.log(updatedobject); //{ a: 'v', address: { country: 'india', city: 'fghj' }, city: 'abc' };
+
+console.log(object);//{ a: 'b', address: { country: 'india', city: 'fghj' } }
+                                     
+  //********************************************************SPREAD OPERATOR ->updating array using spread operator******************************************************************* *//         
+  
+  const arraynumber = [1, 2, 3];
+
+//*****************************************************copying the array in other variable
+// const copynumber=[...arraynumber];
+
+// console.log(copynumber);//[ 1, 2, 3 ]
+
+//*****************************************************adding  aaray*******************************************
+// const copynumber=[...arraynumber,89];
+
+// console.log(copynumber);//[ 1, 2, 3,89];
+
+//******************************************************difference between  ....(tripple dot) and without ....(triple dot) */
+// const arryssd=[arraynumber];
+
+// console.log(arryssd)// [ [ 1, 2, 3 ] ];
+
+
+//*****************************************************remove  aaray*******************************************
+//  let remainingnumber=arraynumber.filter(data=>data!==1)
+//  console.log(remainingnumber);//[ 2, 3 ]
+
+
+ //*****************************************************update aaray*******************************************
+ let remainingnumber=arraynumber.map(data=>data===2 ? 30 : data)
+ console.log(remainingnumber);//[ 1, 30, 3 ]
