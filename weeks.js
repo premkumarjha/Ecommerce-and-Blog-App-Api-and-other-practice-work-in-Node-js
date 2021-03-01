@@ -1,3 +1,4 @@
+const { json } = require("express");
 
  let array=[
    {id:1,name:"prem"},
@@ -313,3 +314,125 @@ console.log(object);//{ a: 'b', address: { country: 'india', city: 'fghj' } }
  //*****************************************************update aaray*******************************************
  let remainingnumber=arraynumber.map(data=>data===2 ? 30 : data)
  console.log(remainingnumber);//[ 1, 30, 3 ]
+
+ //********************sorting the array of object on basis of any field or property************************************** */
+
+ let employees = [
+  {
+      firstName: 'John',
+      lastName: 'Doe',
+      age: 27,
+      joinedDate: 'December 15, 2017'
+  },
+
+  {
+      firstName: 'Ana',
+      lastName: 'Rosy',
+      age: 45,
+      joinedDate: 'January 15, 2019'
+  },
+
+  {
+      firstName: 'Zion',
+      lastName: 'Albert',
+      age: 30,
+      joinedDate: 'February 15, 2011'
+  }
+];
+
+//employees.sort((a,b)=>{ return a.age - b.age }) ;
+
+//****************************every() and some()******************************************************** **************************/
+
+
+//The every() method tests whether all elements in the array pass the test implemented by the provided function. It returns a Boolean value. Array.prototype.every
+//every()  each object pe condition check kartha and true false rerurn kaerta
+
+//let opl=employees.every(data=>data.age<56);// true
+
+//let opl=employees.every(data=>data.age>27);// false //sare obj ke age 27 se bada to nahi hai, so false
+
+
+
+//some() will just check the condition and if one object pe condition true or match hua to wo phir remaining obj pe condition check nahi karega;
+//some() will not match condition on all object , jaise hi ak bhi obj pe match hua wo wahi stop ho jayega and result de dega and remaining pe check  nahi karega
+
+
+//let opl=employees.some(data=>data.age>100); //false
+
+
+//let opl=employees.some(data=> data.age<28); //true // jaise hi ak bhi obj pe condition  match hua,to wo phir loop wahi stop ho jasyega and other obj pe check nahi karega
+
+
+// *****************************difference between undefine and not define*************************************************
+
+// undefined : variable is declared but value is not assign;
+// not defined : variable is not declared;(if koi varible declare nahi kiya and direct usko conlole log kiya to wo not define karke aayega)
+
+
+// ***************************************************************************************
+
+
+//***********************************basic concept**********************************************************************************/
+
+//filter or map array obj return karta ,for that  memory jyda lagta rather than boolean ;
+
+//some(),every() ->boolean return karta  ,for boolean memory  less lagta than array obj;
+
+//so in case have to choose over filter() map() every() some()  ,try to choose some(), every() as acquire less memory;
+
+
+//**************************shallow copy and deep copy******************spread operator deep copy karta ************************************************ */
+
+
+//https://dev.to/edwardluu/understanding-deep-and-shallow-copy-in-javascript-4im0  ----->  best  imp link(deep and shalow)
+
+//https://stackabuse.com/spread-operator-in-javascript/  ----------------------------------->spread operator 
+
+//https://www.geeksforgeeks.org/what-is-shallow-copy-and-deep-copy-in-javascript/  ----------->deep and shallow
+
+
+
+// var ob1={"name":"prem","id":56}
+
+//  let ob2=ob1;  //this is the shallow copy //here reference copy hua 
+
+// ob2.name="shyam";
+
+
+// console.log("ob1",ob1);//shyam
+
+// console.log("ob2",ob2);//shyam
+
+
+
+var ob1={"name":"prem","id":56};
+
+//first way
+
+//let ob2=JSON.parse(JSON.stringify(ob1)); //deep copy //yaha ham reference nahi balki complete new obj rakh rahe hai //json parse new obj deta
+
+//second way
+
+//let ob2={...ob1} //deep cope ////yaha ham reference nahi balki complete new obj rakh rahe hai //  spread operator se new obj milta
+
+//third way
+
+//let ob2=Object.assign({},ob1);
+
+ob2.name="shyam"
+console.log("ob1:",ob1);//prem
+console.log("ob2:",ob2);//shyam
+
+//***********************************Object copy*****************************************************************************/
+
+//three ways:-> spread opretor, Object.assign, Json.parse->is se kaya hota ki real obj change nahi hota if copied obj ke koi prop pe kuch change kiya to,in short it is deep copy
+
+//direct one object ke ref ko other ke ref ke equal // var ob1={"name":"prem","id":56}; let ob2=ob1;  //this is the shallow copy //here reference copy hua 
+
+
+//************************************************************************************************************** */
+
+
+//***********************filter() with two parameter************************************************************** */
+
