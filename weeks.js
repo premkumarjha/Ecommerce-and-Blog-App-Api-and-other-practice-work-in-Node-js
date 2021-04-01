@@ -418,8 +418,7 @@ var ob1={"name":"prem","id":56};
 
 //third way
 
-//let ob2=Object.assign({},ob1);
-
+let ob2=Object.assign({},ob1); //deep cope ////yaha ham reference nahi balki complete new obj rakh rahe hai 
 ob2.name="shyam"
 console.log("ob1:",ob1);//prem
 console.log("ob2:",ob2);//shyam
@@ -434,5 +433,124 @@ console.log("ob2:",ob2);//shyam
 //************************************************************************************************************** */
 
 
-//***********************filter() with two parameter************************************************************** */
+//***********************filter() and map() with two parameter************************************************************** */
+
+
+
+//---->filter as per condition (let 20 object hai and 20 se hame 10 chahiye to we can do easily);
+//----> In filter: Function will be applied to only those objects of iterable who goes True on the condition specified in expression.
+
+
+// let val=employees.filter((data,i)=>{
+// data.index=i;
+// if(data.index==1){
+//   return data;
+// }
+// })
+
+// console.log("val for filter is:",val); // we will get output obj whose index=1;as In filter: Function will be applied to only those objects of iterable who goes True on the condition specified in expression.
+
+
+//**************************MAP()*************************************************************************************** */
+
+
+//map me condition laga ke kuch phyada nahi ,Q ki map me all object iterate , so jjahaa condition false usme undefine aayega
+
+//In map: Function will be applied to all objects of iterable.
+
+let val1=employees.map((data,i)=>{
+
+  data.index=i;
+  if(data.index <2){ 
+    return data.firstName;
+  }
+})
+
+console.log("val1 for map is:",val1); //[ 'John', 'Ana', undefined ] ,//we get last obj as undefine because In map: Function will be applied to all objects of iterable( yaha condition bhi lagay to bhi all object ko iterate karega and jaha condition false uska output undefine aata)
+
+
+
+//*********************************jb array of object se only n number of object ka koi ak field ( 30 object se sirf 10 hi display)  display ,than use slice*/
+
+//https://www.programiz.com/javascript/library/array/slice
+
+//https://www.w3schools.com/jsref/jsref_slice_array.asp
+
+let topfiveobjectname=employees.slice(0,2).map(data=>data.firstName);;
+
+console.log("top two:",topfiveobjectname)
+
+//*********************************giving space between two string****************************************** ********************/
+
+let first="Hare";
+let second="krishana";
+
+let third=first + "" + second;
+
+//console.log(third) //Harekrishana
+
+
+let fourth=first + " " + second;
+
+//console.log(fourth);//Hare krishana
+
+
+//******************************************************************************************************************************* */
+
+//********************* join()********************************************************************************************/
+
+const elements = ['Fire', 'Air', 'Water'];
+
+//console.log(elements.join());//output: Fire,Air,Water
+//console.log(elements.join(''));//output: FireAirWater
+//console.log(elements.join('-'));//output: Fire-Air-Water
+
+//**************************if return data nahi karenge to blank matlb empty array milega********************************************************************************* */
+
+let agesss=employees.filter(data=>{
+
+  if(data.age>10){
+    data.age=34;
+  }
+return data; //if yaha return data nahi likhenge to cosole me blank yani emplty data aayega;
+})
+console.log("hey prem:",agesss)
+//********************************************************************************************************* */
+var datas = {
+  'Country1' : '20',
+  'country2': '30',
+  'country3': '40',
+  'country4' : '45'
+};
+var result = [];
+Object.keys(datas).forEach(key => {
+  result.push({'name':key,'value':datas[key]});
+  
+});
+//console.log(result);
+//************************************************************************************************************* */
+
+
+//*******************JSON.stringify and  JSON.parse*********************************************************** */
+
+var testObject = {one: 1,"two":2,"three":3};
+
+var jSonString = JSON.stringify(testObject);
+
+var obj2 =JSON.parse(jSonString);
+
+console.log(obj2);
+
+//*******************jo obj copy usi ke koi prop ko again add karenge to wo add nahi balki overwrite hoga,ha jo prop copied obj me nahi hai wo add karenge to add hoga*/
+
+
+let prem={
+  age:12,
+  name:"prem"
+}
+
+let sonu={...prem,age:13,name:"himanshu" ,god:"jay ma kali"};
+console.log("sonu object outout:",sonu); //sonu object outout: { age: 13, name: 'himanshu', god: 'jay ma kali' }
+
+console.log("prem object outout:",prem); //prem object outout: { age: 12, name: 'prem' }
 
