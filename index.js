@@ -39,7 +39,7 @@ var PAYPAL_API = 'https://api.sandbox.paypal.com';
 
  
 
-  var forgotpasswordRouter = require('./forgotpasswordRoute');
+  var forgotpasswordRouter = require('./forgotpasswordAndEcomerceRoute');
 
   var passportloginRouter=require('./passportRoute')
   //login route
@@ -47,7 +47,7 @@ var PAYPAL_API = 'https://api.sandbox.paypal.com';
   var publicDir = require('path').join(__dirname, './uploads');
   app.use(express.static(publicDir));
 
-  var addCourseRouter = require('./addCourseRoute')
+  var blogAppRouter = require('./blogAppRoute')
   var cors = require('cors');
   var bodyParser = require('body-parser');
   app.use(bodyParser.json());
@@ -74,7 +74,7 @@ app.use(passport.session());
 
   app.use('/passportlogin', passportloginRouter);
 
-  app.use('/course', addCourseRouter);
+  app.use('/course', blogAppRouter);
   //ejs
   ///app.set("view engine", "ejs"); 
 

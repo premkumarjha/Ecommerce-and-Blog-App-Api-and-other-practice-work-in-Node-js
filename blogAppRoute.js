@@ -1,5 +1,5 @@
 var express = require('express');
-var addCourseRouter = express.Router();
+var blogAppRouter = express.Router();
 var mongoose = require('mongoose');
 var Subject = require('./subjectmodel');
 var Blog = require('./blogModel');
@@ -31,7 +31,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 /* GET ALL Student */
-addCourseRouter.get('/getsubject', function (req, res,) {
+blogAppRouter.get('/getsubject', function (req, res,) {
 
   Subject.find(function (err, post) {
     if (err) {
@@ -44,7 +44,7 @@ addCourseRouter.get('/getsubject', function (req, res,) {
 });
 
 /* Post  Student */
-addCourseRouter.post('/addsubject', function (req, res) {
+blogAppRouter.post('/addsubject', function (req, res) {
   Subject.create(req.body, function (err, post) {
     if (err) {
       console.log(err);
@@ -57,7 +57,7 @@ addCourseRouter.post('/addsubject', function (req, res) {
   });
 });
 
-addCourseRouter.post('/postblog', function(req, res) {
+blogAppRouter.post('/postblog', function(req, res) {
   Contents.create(req.body, function (err, post) {
       if(err){
           console.log(err);
@@ -70,7 +70,7 @@ addCourseRouter.post('/postblog', function(req, res) {
   });
 });
 
-addCourseRouter.post('/authorlogin',async function (req, res) {
+blogAppRouter.post('/authorlogin',async function (req, res) {
 
   console.log(req.body);
   
@@ -91,7 +91,7 @@ addCourseRouter.post('/authorlogin',async function (req, res) {
    }
 });
 
-addCourseRouter.post('/authorsignup', async function (req, res) {
+blogAppRouter.post('/authorsignup', async function (req, res) {
 //console.log(req.body)
 try{
 let author= await Blog.findOne({author:req.body.author});
@@ -116,7 +116,7 @@ return res.send(err);
 }
 });
 
-addCourseRouter.post('/postcontent/:id', upload.single('images'), async function (req, res) {
+blogAppRouter.post('/postcontent/:id', upload.single('images'), async function (req, res) {
   //upload.single('images'),
    try {
    console.log("path++++++++++++-------------------------------------------",req.file.path,req.body.title);
@@ -178,7 +178,7 @@ addCourseRouter.post('/postcontent/:id', upload.single('images'), async function
 
 
 
-addCourseRouter.get('/getauthor', async function (req, res,) {
+blogAppRouter.get('/getauthor', async function (req, res,) {
 
   ///getauthor/:id
 
@@ -201,7 +201,7 @@ addCourseRouter.get('/getauthor', async function (req, res,) {
 });
 
 //content by author id
-addCourseRouter.get('/getauthor/:id', async function (req, res,) {
+blogAppRouter.get('/getauthor/:id', async function (req, res,) {
 
   ///getauthor/:id
 
@@ -224,7 +224,7 @@ addCourseRouter.get('/getauthor/:id', async function (req, res,) {
 
 //delete the blog
 
-addCourseRouter.delete('/delete/:id', async function (req, res) {
+blogAppRouter.delete('/delete/:id', async function (req, res) {
 
   Contents.findOneAndRemove({ _id: new mongoose.Types.ObjectId(req.params.id) }, function (err, result) {
     if (err) {
@@ -239,7 +239,7 @@ addCourseRouter.delete('/delete/:id', async function (req, res) {
 })
 
 //edit the blog
-addCourseRouter.put('/edit/:id',async function(req,res){
+blogAppRouter.put('/edit/:id',async function(req,res){
 
   Contents.findByIdAndUpdate({ _id: new mongoose.Types.ObjectId(req.params.id)},req.body,function(err, output){
     if (err) {
@@ -252,7 +252,7 @@ addCourseRouter.put('/edit/:id',async function(req,res){
 })
 
 //below is comments section
-addCourseRouter.post('/postcomments/:id',async function(req, res) {
+blogAppRouter.post('/postcomments/:id',async function(req, res) {
 try{
 
   let post = await Contents.findById({ _id: new mongoose.Types.ObjectId(req.params.id)});
@@ -290,7 +290,7 @@ Contents.update( { _id: new mongoose.Types.ObjectId(req.params.id) },
 
 //delete post
 
-addCourseRouter.delete('/deletecomment/:id', async function (req, res) {
+blogAppRouter.delete('/deletecomment/:id', async function (req, res) {
   
   await Contents.findByIdAndUpdate({_id: new mongoose.Types.ObjectId(req.params.id)}, {$pull: {"comments": {_id: new mongoose.Types.ObjectId(req.body._id)}}},
   function(err,result){
@@ -306,7 +306,7 @@ addCourseRouter.delete('/deletecomment/:id', async function (req, res) {
 })
 
 //edit the comment
-addCourseRouter.put('/editcomment/:id',async function(req,res){
+blogAppRouter.put('/editcomment/:id',async function(req,res){
 
 //{ $set: { "comments.$.comment": req.body.comment,"comments.$.createdAt": req.body.createdAt }},function(err,result)
   console.log(req.body)
@@ -320,7 +320,7 @@ await Contents.update({_id: new mongoose.Types.ObjectId(req.params.id),comments:
   }
 })
 })
-// addCourseRouter.post('/postcontent/:id', upload.single('image'),async function(req,res){
+// blogAppRouter.post('/postcontent/:id', upload.single('image'),async function(req,res){
 
 //   try{
 //     console.log("path++++++++++++-------------------------------------------",req.file.path,req.body.title);
@@ -385,4 +385,4 @@ await Contents.update({_id: new mongoose.Types.ObjectId(req.params.id),comments:
    
  
 //   })
-module.exports = addCourseRouter;
+module.exports = blogAppRouter;

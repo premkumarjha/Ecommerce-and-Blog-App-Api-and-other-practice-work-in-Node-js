@@ -414,7 +414,7 @@ var ob1={"name":"prem","id":56};
 
 //second way
 
-//let ob2={...ob1} //deep cope ////yaha ham reference nahi balki complete new obj rakh rahe hai //  spread operator se new obj milta
+let ob2={...ob1} //deep cope ////yaha ham reference nahi balki complete new obj rakh rahe hai //  spread operator se new obj milta
 
 //third way
 
@@ -554,3 +554,11 @@ console.log("sonu object outout:",sonu); //sonu object outout: { age: 13, name: 
 
 console.log("prem object outout:",prem); //prem object outout: { age: 12, name: 'prem' }
 
+let cart=[]
+const product={
+  a:"rtyu",
+  b:"yui"
+}
+
+cart.push({...product,count:1});
+console.log(cart) //[ { a: 'rtyu', b: 'yui', count: 1 } ] ,count prop add ho gay isme
