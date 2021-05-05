@@ -23,17 +23,17 @@ const paypal = require('paypal-rest-sdk');
 var request = require('request');
 paypal.configure({
   'mode': 'sandbox', //sandbox or live
-  'client_id': 'AUBHMO27NrctpTp3aWnFcZJho33ki4ce_HdN2XJ3K2vAp3jLGcwf24D357okYnd923-EGwUIohqgxCmR',
-  'client_secret': 'EJHtQGwpX2hj_fdEcUCdyG5KSYroll8-liIM7zhdqMIi5MFU45JBHDneBgFZHCmb0YTTf80gk-QH7jfj'
+  'client_id': '',
+  'client_secret': ''
 });
 //csv to json
 var output = [];
 
 var CLIENT =
-  'AUBHMO27NrctpTp3aWnFcZJho33ki4ce_HdN2XJ3K2vAp3jLGcwf24D357okYnd923-EGwUIohqgxCmR';
+  '';
 
 var SECRET =
-  'EJHtQGwpX2hj_fdEcUCdyG5KSYroll8-liIM7zhdqMIi5MFU45JBHDneBgFZHCmb0YTTf80gk-QH7jfj';
+  '';
 
 var PAYPAL_API = 'https://api.sandbox.paypal.com';
 
