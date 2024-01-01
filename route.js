@@ -17,6 +17,7 @@ const fs = require('fs');
 const { db } = require('./studentmodel');
 
 const imageModel = require('./imageModel');
+const quillEditorModel = require('./ngxquill');
 const { json } = require('body-parser');
 const mongodb = require("mongodb").MongoClient;
 //node mailer for email via node js
@@ -47,18 +48,48 @@ console.log(process.env.SECRET_KEY)  //to access env variable
 /* GET ALL Student */
 router.get('/', function (req, res,) {
  let abc=4;
-  Student.find(function (err, post) {
+  // Student.find(function (err, post) {
+  //   if (err) {
+  //     console.log(err);
+  //   }
+  //   else {
+
+  //     let ram=post;
+  //     res.json(post );
+  //   }
+  // });
+return abc;
+});
+
+router.get('/getQuillEditorData', function (req, res,) {
+  let abc=4;
+  quillEditorModel.find(function (err, post) {
+     if (err) {
+       console.log(err);
+     }
+     else {
+ 
+       let ram=post;
+       res.json(post );
+     }
+   });
+ 
+ });
+
+//add quillEditor content
+router.post('/postQuillEditorData', function (req, res) {
+  console.log(req.body)
+  quillEditorModel.create(req.body, function (err, post) {
     if (err) {
       console.log(err);
     }
     else {
-
-      let ram=post;
-      res.json(post);
+      console.log(post);
+      //res.json bhi likh sakte hai no problem
+      return res.send(post);
     }
   });
 });
-
 /* Post  Student */
 router.post('/add', function (req, res) {
   Student.create(req.body, function (err, post) {
@@ -310,8 +341,8 @@ User.findOne({email}).exec((err,user)=>{
           if(err){
             return res.send(err);
           }else{
-            console.log(success)
-            return res.send({message:"Signup Success"})
+            //console.log(success)
+            return res.send({message:"signed up successfully, please login"})
           }
               })
 //console.log(hash);
@@ -329,7 +360,7 @@ router.post('/login',async function (req, res) {
   // if( req.body.email==""){
   //   return res.send({error:"please fill email id"});
   // }
-
+console.log(req.body)
   let user=await User.find({ email: req.body.email })
     // .exec()
     ////.then(user => {
@@ -342,7 +373,7 @@ router.post('/login',async function (req, res) {
         console.log(result)
         if (err) {
           return  res.send({
-            error: err
+            message: "wrong password"
           });
         }
         if (result) {
@@ -356,16 +387,19 @@ router.post('/login',async function (req, res) {
                 expiresIn: "20m"
             }
           );
-          console.log(token)
+         // console.log(token)
           return res.send([{
             message: "Auth successful",
             token: token
           }]);
           
         }
-        res.status(401).json({
-          error:err
+        return  res.send({
+          message: "wrong password"
         });
+        // res.status(401).json({
+        //   message: "wrong password"
+        // });
       });
     })
     // .catch(err => {

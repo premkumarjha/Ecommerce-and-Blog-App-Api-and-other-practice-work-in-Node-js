@@ -32,6 +32,8 @@ var PAYPAL_API = 'https://api.sandbox.paypal.com';
     console.log('Example app listening on port 3000!');
   });
 
+  
+  
 
   app.use(express.urlencoded({ extended: true }));
 
@@ -75,11 +77,16 @@ app.use(passport.session());
   app.use('/passportlogin', passportloginRouter);
 
   app.use('/course', blogAppRouter);
+  
   //ejs
   ///app.set("view engine", "ejs"); 
 
+  //mongocluter
+  //const MONGODB_URI='mongodb+srv://premDatabase:premvinodsonu@premdb.h8n7r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+  //'mongodb://localhost:27017/ace' ||
+  
   var mongoose = require('mongoose');
-  mongoose.connect('mongodb://localhost:27017/ace', { useNewUrlParser: true, useUnifiedTopology: true })
+  mongoose.connect( 'mongodb://localhost:27017/ace' , { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('connection successful'))
     .catch((err) => console.error(err));
 

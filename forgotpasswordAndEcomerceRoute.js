@@ -23,17 +23,18 @@ const paypal = require('paypal-rest-sdk');
 var request = require('request');
 paypal.configure({
   'mode': 'sandbox', //sandbox or live
-  'client_id': '',
-  'client_secret': ''
+  'client_id': 'AUBHMO27NrctpTp3aWnFcZJho33ki4ce_HdN2XJ3K2vAp3jLGcwf24D357okYnd923-EGwUIohqgxCmR',
+  'client_secret': 'EJHtQGwpX2hj_fdEcUCdyG5KSYroll8-liIM7zhdqMIi5MFU45JBHDneBgFZHCmb0YTTf80gk-QH7jfj'
 });
 //csv to json
 var output = [];
 
 var CLIENT =
-  '';
+  'AUBHMO27NrctpTp3aWnFcZJho33ki4ce_HdN2XJ3K2vAp3jLGcwf24D357okYnd923-EGwUIohqgxCmR';
 
 var SECRET =
-  '';
+  'EJHtQGwpX2hj_fdEcUCdyG5KSYroll8-liIM7zhdqMIi5MFU45JBHDneBgFZHCmb0YTTf80gk-QH7jfj';
+  
 
 var PAYPAL_API = 'https://api.sandbox.paypal.com';
 
@@ -195,7 +196,9 @@ forgotpasswordRouter.post('/filldata', upload.single('images'), function(req,res
 // read binary data
 
  // read the img file from tmp in-memory location
+ console.log("path",req.file.path)
 var imagedata= fs.readFileSync(req.file.path);
+console.log("base64",imagedata)
 //// convert binary data to base64 encoded string
 // encode the file as a base64 string.
 var base64data=imagedata.toString('base64');
@@ -228,14 +231,14 @@ imageModel.create(data, function (err, post) {
 
 })
 
-forgotpasswordRouter.get('/productdeatil' ,async function(req,res){
+forgotpasswordRouter.get('/productdeatil' , function(req,res){
 
   imageModel.find(function (err, post) {
     if (err) {
       console.log(err);
     }
     else {
-      //console.log(post)
+      console.log(post)
       res.send({data:post});
     }
   })
